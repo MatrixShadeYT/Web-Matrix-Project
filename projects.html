@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Projects</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Inter', sans-serif;
+                background-color: #0c1427;
+            }
+            .project-card {
+                background-color: #1a2035;
+                border: 1px solid #2d3748;
+                transition: all 0.3s ease-in-out;
+            }
+            .project-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+                border-color: #4a5568;
+            }
+            .icon-container {
+                background-color: #0c1427;
+            }
+            #page div div div img {src: url('/imgs/house_inactive.png')}
+            #page div div div img:hover {src: url('/imgs/house_active.png')}
+        </style>
+        <script src="gallery.js"></script>
+    </head>
+    <body class="text-white">
+        <div class="container mx-auto px-4 py-16">
+            <header class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold mb-2">My Projects</h1>
+                <p class="text-lg md:text-xl text-gray-400">Here are some of the things I've been working on.</p>
+            </header>
+            <div id="page" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </div>
+    </body>
+</html>
