@@ -2,7 +2,7 @@ var data = {
   "projects": [
     {
         "name": "Template Website",
-        "icon": "/imgs/house_inactive.png",
+        "icon": "/imgs/house_icon.png",
       "link": "/projects/template.html",
         "desc": "A template for a website project. This template has the Title, Description, Preview, and File Info sections."
     }
@@ -44,7 +44,7 @@ var data = {
 
 function loadProject(page) {
   for (let i = 0; i < data["projects"].length; i++) {
-    const gui = document.createElement('div');
+    const div = document.createElement('div');
     div.classList.add('project-card','rounded-lg','p-6','flex','flex-col');
     const div2 = document.createElement('div');
     div2.classList.add('flex','items-center','mb-4');
@@ -71,13 +71,13 @@ function loadProject(page) {
     a.href = data["projects"][i].link;
     a.innerHTML = "View Project &rarr;";
     div.appendChild(a);
-    page.appendChild(gui);
+    page.appendChild(div);
   }
 }
 
 function loadMedia(page) {
   for (let i = 0; i < data["media"].length; i++) {
-    const gui = document.createElement('div');
+    const div = document.createElement('div');
     div.classList.add('social-card','rounded-xl','p-6','shadow-lg','border','border-gray-700');
     const a = document.createElement('a');
     a.href = data["media"][i].url;
@@ -93,40 +93,42 @@ function loadMedia(page) {
     p.classList.add('text-sm','text-gray-400');
     p.textContent = data["media"][i].user;
     a.appendChild(p);
-    page.appendChild(gui);
+    page.appendChild(div);
   }
 }
 
 function loadArt(page) {
   for (let i = 0; i < data["arts"].length; i++) {
-    const gui = document.createElement('div');
+    const div = document.createElement('div');
     div.classList.add('art-card','rounded-xl','overflow-hidden','shadow-lg','border','border-gray-700');
     const a = document.createElement('a');
     a.href = data["arts"][i].link;
     div.appendChild(a);
     const img = document.createElement('img');
-    img.src = data[i].url;
-    img.alt = data[i].name;
+    img.src = data["arts"][i].url;
+    img.alt = data["arts"][i].name;
     a.appendChild(img);
     const div2 = document.createElement('div');
     div2.classList.add('p-4','text-center');
     a.appendChild(div2);
     const h2 = document.createElement('h2');
     h2.classList.add('text-xl','font-semibold');
-    h2.textContent = data[i].name;
+    h2.textContent = data["arts"][i].name;
     div2.appendChild(h2);
-    page.appendChild(gui);
+    page.appendChild(div);
   }
 }
 
-var url = window.location.href.split('/').slice(-1)[0].replace(".html","");
-const page = document.getElementById('page');
-if (url == "projects") {
-  loadProject(page);
-} else if (url == "media") {
-  loadMedia(page);
-} else if (url == "art") {
-  loadArt(page);
-} else {
-  console.log("Error: Invalid.")
-}
+document.addEventListener('DOMContentLoaded', function () {
+  var url = window.location.href.split('/').slice(-1)[0].replace(".html","");
+  const page = document.getElementById('page');
+  if (url == "projects") {
+    loadProject(page);
+  } else if (url == "media") {
+    loadMedia(page);
+  } else if (url == "art") {
+    loadArt(page);
+  } else {
+    console.log("Error: Invalid.")
+  }
+})

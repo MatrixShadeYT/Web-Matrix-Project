@@ -24,8 +24,14 @@
             .icon-container {
                 background-color: #0c1427;
             }
-            #page div div div img {src: url('/imgs/house_inactive.png')}
-            #page div div div img:hover {src: url('/imgs/house_active.png')}
+            #page div div div img {
+                filter: grayscale(0.95);
+                transition: filter 0.3s ease-in-out;
+            }
+            #page div:hover div div img {
+                filter: grayscale(0);
+                transition: filter 0.3s ease-in-out;
+            }
         </style>
         <script src="gallery.js"></script>
     </head>
