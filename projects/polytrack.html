@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Project Detail</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Inter', sans-serif;
+                background-color: #0b1120;
+                color: #d1d5db;
+            }
+            .container {
+                max-width: 1024px;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-900 text-gray-300 antialiased">
+        <div class="container mx-auto px-4 py-16">
+            <header class="text-center mb-16">
+                <h1 class="text-5xl md:text-6xl font-bold text-white mb-4">PolyTrack AI</h1>
+                <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
+                    This is a project that I made in an attempt to make an AI that could interact 
+                    with PolyTrack from Yoosfuhl's website. It didn't go very well...
+                </p>
+            </header>
+
+            <!-- Preview Section -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-semibold text-white mb-6">Preview</h2>
+                <div class="bg-gray-800 rounded-lg shadow-xl border border-gray-700 w-full aspect-[5/3] overflow-hidden">
+                    <div class="w-full h-full overflow-x-auto overflow-y-auto p-4">
+                        <pre class="text-sm text-gray-200 whitespace-pre h-full"><code>
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium import webdriver
+from PIL import Image
+import random
+import time
+import os
+import io
+
+def get_image():
+    png_bytes = driver.get_screenshot_as_png()
+    img = Image.open(io.BytesIO(png_bytes)).convert("RGB")
+    return img
+
+def setup_map():
+    game = ActionChains(driver)
+    game.move_by_offset(600,300).click().pause(0.1)
+    game.move_by_offset(-450,-150).click().pause(0.1)
+    game.move_by_offset(350,250).click().perform()
+    time.sleep(0.5)
+
+def game_loop():
+    currentKeys = []
+    actions = ActionChains(driver)
+    for i in range(len(moves)):
+        currentKeys = currentKeys.copy()
+        if moves[i] != 0:
+            key = combos[moves[i]-1]
+            for x in range(len(key)):
+                if not key[x] in currentKeys:
+                    actions.key_down(keyIndex[key[x]])
+                    currentKeys.append(key[x])
+            listed = []
+            for x in range(len(currentKeys)):
+                if not currentKeys[x] in key:
+                    actions.key_up(keyIndex[currentKeys[x]])
+                    listed.append(currentKeys[x])
+            for x in range(len(listed)):
+                currentKeys.remove(listed[x])
+        else:
+            currentKeys = currentKeys.copy()
+            for x in range(len(currentKeys)):
+                actions.key_up(currentKeys[x])
+            currentKeys = []
+        actions.pause(0.25)
+    actions.perform()
+                        </code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- File Info Section -->
+            <div>
+                <h2 class="text-3xl font-semibold text-white mb-6">File Info</h2>
+                <div class="bg-gray-800 rounded-lg p-6 shadow-xl border border-gray-700 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- File 1 -->
+                    <div class="flex flex-col">
+                        <h3 class="text-xl font-semibold text-white mb-2">polytrack.py</h3>
+                        <p class="text-gray-400 text-sm mb-4">The file that contains this project.</p>
+                        <a href="https://github.com/MatrixShadeYT/Applied-AI/blob/main/polytrack.py" target="_blank" class="mt-auto text-blue-400 hover:text-blue-300 flex items-center transition-colors duration-300">
+                            View on GitHub
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

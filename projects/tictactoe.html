@@ -1,84 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Project Detail</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
         <style>
             body {
-                background-color: black;
-                margin: 0px;
+                font-family: "Inter", sans-serif;
+                background-color: #0b1120;
+                color: #d1d5db;
             }
-            div {
-                background-color: darkslategray;
-                border-radius: 2.5vh;
-                outline-style: solid;
-                outline-color: white;
-                outline-width: 1vh;
-                height: 50vh;
-                width: 50vh;
-                margin: 0px;
-                display: absolute;
-                left: 50vw;
-                top: 75vh;
-                display: grid;
-                grid-template-columns: 15vh, 15vh, 15vh;
+            .container {
+                max-width: 1024px;
             }
-            h1 {
-                color: white;
+            iframe {
+                border: none;
             }
-            p {
-                background-color: darkgray;
-                border-radius: 2.5vh;
-                height: 15vh;
-                width: 15vh;
-                margin: 0.5vh;
-                font-size: 10vh;
-            }
-            p:nth-child(3n+1) {grid-column:1;}
-            p:nth-child(3n+2) {grid-column:2;}
-            p:nth-child(3n) {grid-column:3;}
         </style>
-        <script>
-            const currentPlayer = document.getElementsByTagName("h1")[0];
-            const board = [0,0,0,0,0,0,0,0,0];
-            var player = 1;
-            function run (item) {
-                var num = parseInt(item.id.replace("#", ""));
-                if (player == 1) {
-                    board[num-1] = player;
-                    item.classList.remove("empty");
-                    item.classList.add("p"+player);
-                    item.onclick = null;
-                    item.innerHTML = "X";
-                    player = 2;
-                } else if (player == 2) {
-                    board[num-1] = player;
-                    item.classList.remove("empty");
-                    item.classList.add("p"+player);
-                    item.onclick = null;
-                    item.innerHTML = "O";
-                    player = 1;
-                } else {
-                    item.innerHTML = "#";
-                }
-                currentPlayer.innerHTML = "Player: "+player;
-                return
-            }
-        </script>
     </head>
-    <body>
-        <center>
-            <h1>Player: #</h1>
-            <div>
-                <p id='#1' class="empty" onclick="run(this);">#</p>
-                <p id='#2' class="empty" onclick="run(this);">#</p>
-                <p id='#3' class="empty" onclick="run(this);">#</p>
-                <p id='#4' class="empty" onclick="run(this);">#</p>
-                <p id='#5' class="empty" onclick="run(this);">#</p>
-                <p id='#6' class="empty" onclick="run(this);">#</p>
-                <p id='#7' class="empty" onclick="run(this);">#</p>
-                <p id='#8' class="empty" onclick="run(this);">#</p>
-                <p id='#9' class="empty" onclick="run(this);">#</p>
+    <body class="bg-gray-900 text-gray-300 antialiased">
+        <div class="container mx-auto px-4 py-16">
+            <header class="text-center mb-16">
+                <h1 class="text-5xl md:text-6xl font-bold text-white mb-4">
+                    Tic-Tac-Toe Website
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
+                    An attempt at making yet another game. Why do I keep on
+                    going? I don't know
+                </p>
+            </header>
+
+            <!-- Preview Section -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-semibold text-white mb-6">Preview</h2>
+                <div class="bg-gray-800 rounded-lg p-4 shadow-xl border border-gray-700">
+                    <iframe src="/hidden/tictactoe.html" class="w-full h-[600px] rounded-md"></iframe>
+                </div>
             </div>
-        </center>
+
+            <!-- File Info Section -->
+            <div>
+                <h2 class="text-3xl font-semibold text-white mb-6">
+                    File Info
+                </h2>
+                <div
+                    class="bg-gray-800 rounded-lg p-6 shadow-xl border border-gray-700 grid grid-cols-1 md:grid-cols-2 gap-8"
+                >
+                    <!-- File 1 -->
+                    <div class="flex flex-col">
+                        <h3 class="text-xl font-semibold text-white mb-2">
+                            tictactoe.html
+                        </h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Main HTML file for this project.
+                        </p>
+                        <a
+                            href="https://github.com/MatrixShadeYT/Web-Matrix-Project/blob/main/hidden/tictactoe.html"
+                            target="_blank"
+                            class="mt-auto text-blue-400 hover:text-blue-300 flex items-center transition-colors duration-300"
+                        >
+                            View on GitHub
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-4 w-4 ml-1"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
