@@ -22,149 +22,51 @@
     <body class="bg-gray-900 text-gray-300 antialiased">
         <div class="container mx-auto px-4 py-16">
             <header class="text-center mb-16">
-                <h1 class="text-5xl md:text-6xl font-bold text-white mb-4">PolyTrack AI</h1>
-                <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
-                    This is a project that I made in an attempt to make an AI that could interact 
-                    with PolyTrack from Yoosfuhl's website. It didn't go very well...
-                </p>
+                <h1 class="text-5xl md:text-6xl font-bold text-white mb-4">Portfolio Website</h1>
+                <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">A personal portfolio website to showcase my skills and projects. Built with modern web technologies to be fast, responsive, and visually appealing.</p>
             </header>
-
+    
             <!-- Preview Section -->
             <div class="mb-16">
                 <h2 class="text-3xl font-semibold text-white mb-6">Preview</h2>
-                <div class="bg-gray-800 rounded-lg shadow-xl border border-gray-700 w-full aspect-[5/3] overflow-hidden">
-                    <div class="w-full h-full overflow-x-auto overflow-y-auto p-4">
-                        <pre class="text-sm text-gray-200 whitespace-pre h-full"><code>
-                            from selenium.webdriver.common.action_chains import ActionChains
-                            from selenium.webdriver.chrome.options import Options
-                            from selenium.webdriver.common.keys import Keys
-                            from selenium.webdriver.common.by import By
-                            from selenium import webdriver
-                            from PIL import Image
-                            import random
-                            import time
-                            import os
-                            import io
-
-                            if os.path.exists('polytrack.txt'):
-                                with open('polytrack.txt','r') as file:
-                                    moves = [int(i) for i in list(file.readlines()[0])]
-                            else:
-                                moves = '0'
-                            valuable = f"{random.randint(1000000000000000000000000000000,99999999999999999999999999999999999999999999999999999999999999)}".replace('9',f"{random.randint(0,8)}")
-                            x = ""
-                            for i in range(len(moves)):
-                                x = f"{x}{moves[i]}"
-                            choiceMoves = input(f"VALUABLE (type value): {valuable}\nPREVIOUS: {x}\nMOVES (blank/previous): ").replace('value',valuable)
-                            show = input("SHOW SCREEN (YES/web, NO/save, other/show): ")
-                            if choiceMoves != "":
-                                with open('polytrack.txt','w') as file:
-                                    file.write(choiceMoves)
-                                moves = [int(i) for i in list(choiceMoves)]
-                            else:
-                                moves = [int(i) for i in list(moves)]
-                            options = Options()
-                            if show != "yes":
-                                options.add_argument("--headless=new")
-                            options.add_argument("--window-size=780,580")
-                            driver = webdriver.Chrome(options=options)
-
-                            keyIndex = {
-                                "a": Keys.ARROW_LEFT,
-                                "d": Keys.ARROW_RIGHT,
-                                "s": Keys.ARROW_DOWN,
-                                "w": Keys.ARROW_UP
-                            }
-                            combos = [
-                                ["a"],
-                                ["d"],
-                                ["s"],
-                                ["w"],
-                                ["a","w"],
-                                ["d","w"],
-                                ["a","s","w"],
-                                ["d","s","w"]
-                            ]
-
-                            def get_image():
-                                png_bytes = driver.get_screenshot_as_png()
-                                img = Image.open(io.BytesIO(png_bytes)).convert("RGB")
-                                return img
-
-                            def setup_map():
-                                game = ActionChains(driver)
-                                game.move_by_offset(600,300).click().pause(0.1)
-                                game.move_by_offset(-450,-150).click().pause(0.1)
-                                game.move_by_offset(350,250).click().perform()
-                                time.sleep(0.5)
-
-                            def commands(cmds):
-                                currentKeys = []
-                                actions = ActionChains(driver)
-                                for i in range(len(cmds)):
-                                    currentKeys = currentKeys.copy()
-                                    if cmds[i] != 0:
-                                        key = combos[cmds[i]-1]
-                                        for x in range(len(key)):
-                                            if not key[x] in currentKeys:
-                                                actions.key_down(keyIndex[key[x]])
-                                                currentKeys.append(key[x])
-                                        listed = []
-                                        for x in range(len(currentKeys)):
-                                            if not currentKeys[x] in key:
-                                                actions.key_up(keyIndex[currentKeys[x]])
-                                                listed.append(currentKeys[x])
-                                        for x in range(len(listed)):
-                                            currentKeys.remove(listed[x])
-                                    else:
-                                        currentKeys = currentKeys.copy()
-                                        for x in range(len(currentKeys)):
-                                            actions.key_up(currentKeys[x])
-                                        currentKeys = []
-                                    actions.pause(0.2)
-                                return actions
-
-                            def get_data():
-                                checkpoints = [i for i in driver.execute_script("return document.getElementsByClassName('checkpoint')[0].children[0].children[1].innerHTML").split('/')]
-                                speed = 0
-                                length = int(driver.execute_script("return document.getElementsByClassName('speedometer')[0].children[0].children[0].children.length;"))
-                                li = [[1],[10,1],[100,10,1],[1000,100,10,1]]
-                                for i in range(length):
-                                    time.sleep(0.1)
-                                    val = driver.execute_script(f"return document.getElementsByClassName('speedometer')[0].children[0].children[0].children[{i}].innerHTML")
-                                    speed += li[length-1][i]*int(val)
-                                return [checkpoints,speed]
-
-                            try:
-                                driver.get("https://www.yoosfuhl.com/game/polytrack/index.html")
-                                time.sleep(3.1)
-                                setup_map()
-                                time.sleep(2)
-                                commands(moves).perform()
-                                time.sleep(1)
-                                if show == "no":
-                                    get_image().save("polytrack.png")
-                                elif show == "yes":
-                                    data = [i for i in get_data()]
-                                    print(f"Checkpoints: {data[0][0]}/{data[0][1]}\nSpeed: {data[1]}")
-                                else:
-                                    get_image().show()
-                            finally:
-                                driver.quit()
-                        </code></pre>
-                    </div>
+                <div class="bg-gray-800 rounded-lg p-4 shadow-xl border border-gray-700">
+                    <img src="https://placehold.co/1000x600/1f2937/d1d5db?text=Project+Preview" alt="Project Preview" class="w-full h-auto rounded-md">
                 </div>
             </div>
-
+    
             <!-- File Info Section -->
             <div>
                 <h2 class="text-3xl font-semibold text-white mb-6">File Info</h2>
                 <div class="bg-gray-800 rounded-lg p-6 shadow-xl border border-gray-700 grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- File 1 -->
                     <div class="flex flex-col">
+                        <h3 class="text-xl font-semibold text-white mb-2">main.py</h3>
+                        <p class="text-gray-400 text-sm mb-4">The main python file for this project.</p>
+                        <a href="https://github.com/MatrixShadeYT/Natsuki-PolyTrack-AI/blob/main/main.py" target="_blank" class="mt-auto text-blue-400 hover:text-blue-300 flex items-center transition-colors duration-300">
+                            View on GitHub
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </a>
+                    </div>
+    
+                    <!-- File 2 -->
+                    <div class="flex flex-col">
                         <h3 class="text-xl font-semibold text-white mb-2">polytrack.py</h3>
-                        <p class="text-gray-400 text-sm mb-4">The file that contains this project.</p>
-                        <a href="https://github.com/MatrixShadeYT/Applied-AI/blob/main/polytrack.py" target="_blank" class="mt-auto text-blue-400 hover:text-blue-300 flex items-center transition-colors duration-300">
+                        <p class="text-gray-400 text-sm mb-4">This is how I ATTEMPTED to interact with PolyTrack from Yoosfuhl.</p>
+                        <a href="https://github.com/MatrixShadeYT/Natsuki-PolyTrack-AI/blob/main/polytrack.py" target="_blank" class="mt-auto text-blue-400 hover:text-blue-300 flex items-center transition-colors duration-300">
+                            View on GitHub
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </a>
+                    </div>
+    
+                    <!-- File 3 -->
+                    <div class="flex flex-col">
+                        <h3 class="text-xl font-semibold text-white mb-2">natsuki.py</h3>
+                        <p class="text-gray-400 text-sm mb-4">The file that deals mainly with the AI model</p>
+                        <a href="https://github.com/MatrixShadeYT/Natsuki-PolyTrack-AI/blob/main/natsuki.py" target="_blank" class="mt-auto text-blue-400 hover:text-blue-300 flex items-center transition-colors duration-300">
                             View on GitHub
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -173,6 +75,7 @@
                     </div>
                 </div>
             </div>
+    
         </div>
     </body>
 </html>
