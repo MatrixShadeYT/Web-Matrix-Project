@@ -24,6 +24,12 @@ var data = {
       link: "/projects/polytrack.html",
       desc: "I tried to make AI but I ended up just doing a simple inputs thing."
     },
+    {
+      name: "tilemapGame",
+      icon: "/imgs/hashtag.png",
+      link: "/projects/tilemapGame.html",
+      desc: "I went ahead and tried to make a tilemap game."
+    }
   ],
   media: [
     {
